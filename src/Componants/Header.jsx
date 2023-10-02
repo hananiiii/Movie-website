@@ -18,24 +18,30 @@ const Header = () => {
   };
 
   return (
-    <section className='Navbar  flex flex-1'>
-      <div className={`${open ? "w-72" : "w-20"}  h-screen w-72 p-5 pt-8 bg-blue relative `}>
-        <span className='absolute cursor-pointer top-9 text-4xl text-light-white shadow-blue -right-3 ' onClick={handleToggle}>
-          <ion-icon name="chevron-back-circle"></ion-icon>
-        </span>
-      
-          <Logo open={open} className={`${open && "rotate-[360deg]"}`} />
-        
-      
+    <section className='Navbar flex flex-1'>
+    <div className={`w-${open ? "72" : "20"} h-screen p-5 pt-8 bg-blue relative`}>
+      <span className='absolute cursor-pointer top-9 text-4xl text-light-white shadow-blue -right-3 ' onClick={handleToggle}>
+        <ion-icon name={open ? "chevron-back-circle" : "chevron-forward-circle"}></ion-icon>
+      </span>
+      <Logo open={open} className={`${open && "rotate-[360deg]"}`} />
       <ul className='pt-6 flex flex-col gap-6'>
-        {Menu.map((menu,index)=>(
-          <li 
-          key={index} 
-          className={`text-light-white  text-sm flex items-center rounded-md gap-x-4 cursor-pointer p-2 hover:underline hover:bg-light-white hover:text-blue font-bold ${menu.gap ? "mt-9" :"mt-2"} "}  ` }>
-       <span className='text-xl'>{menu.icon}</span>
-           <span className={`${!open && "hidden"} origin-left duration-200`}>{menu.title}</span> 
-          </li>
-        ))}
+
+      {Menu.map((menu, index) => (
+  <li
+    key={index}
+    className={`text-light-white  text-sm flex items-center rounded-md gap-x-4 cursor-pointer p-2 hover:underline hover:bg-light-white hover:text-blue font-bold ${
+      menu.gap ? "mt-9" : "mt-2"
+    }`}
+  >
+    <span className='text-xl text-light-white'>
+      {React.cloneElement(menu.icon, { className: 'light-white-icon' })}
+    </span>
+    <span className={`${!open && "hidden"} origin-left text-light-white duration-200`}>
+      {menu.title}
+    </span>
+  </li>
+))}
+
       </ul>
       </div>
       
